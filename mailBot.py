@@ -37,7 +37,7 @@ server = smtplib.SMTP(smtp_server, port)
 with smtplib.SMTP(smtp_server, port) as server:
     server.starttls(context=context)
     server.login(login, password)
-    with open("baseLoginONS.csv") as file:
+    with open("test.csv") as file:
         reader = pd.read_csv(file)
         reader_filtro = reader[(reader.statusResposta == "nao respondeu")]
         for index, row in reader_filtro.iterrows():
