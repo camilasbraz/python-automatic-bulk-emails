@@ -1,1 +1,1 @@
-email,enviado
+email,sent
