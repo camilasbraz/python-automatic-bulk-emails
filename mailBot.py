@@ -19,6 +19,10 @@ from email.mime.multipart import MIMEMultipart
 import smtplib
 import ssl
 import pandas as pd
+from datetime import datetime
+ 
+    
+today = datetime.now()
 
 smtp_server = "smtp.gmail.com"
 port = 587  # For starttls
@@ -52,11 +56,11 @@ with smtplib.SMTP(smtp_server, port) as server:
                             <body>
 
                               <p>Hello {name}, how are you<br><br>
-                              
+
                               This is just a mock email!!<br>
-                              
+
                               Your favorite animal is {fav_aninal}
-                              
+
 
                             </body>
                           </html>
@@ -68,6 +72,10 @@ with smtplib.SMTP(smtp_server, port) as server:
           server.send_message(
               message
           )
+          row['sent'] = "yes"
+      
+          with open('enviados.txt', 'a') as f:
+            f.write(f'{row["email"]}, {row["sent"]} \n')
 
           del message
 
