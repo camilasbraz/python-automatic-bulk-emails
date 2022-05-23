@@ -43,7 +43,8 @@ with smtplib.SMTP(smtp_server, port) as server:
     server.login(login, password)
     with open("test.csv") as file:
         reader = pd.read_csv(file)
-        reader_filtro = reader[(reader.statusResposta == "nao respondeu")]
+        reader_filtro_aux = reader[(reader.statusResposta == "nao respondeu")]
+        reader_filtro = reader_filtro_aux[(reader_filtro_aux.enviado == "nao")]
         for index, row in reader_filtro.iterrows():
           message = MIMEMultipart("related")
           message["Subject"] = "Email subjetc"
